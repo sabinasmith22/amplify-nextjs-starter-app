@@ -1,5 +1,11 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Amplify } from 'aws-amplify';
+import config from '@/amplifyconfiguration.json';
+import '@aws-amplify/ui-react/styles.css';
+import type { AppProps } from 'next/app';
+
 
 export default function Home() {
   return (
