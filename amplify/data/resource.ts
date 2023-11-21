@@ -10,9 +10,11 @@ authenticated via an API key, can only "read" records.
 const schema = a.schema({
   Todo: a
     .model({
-      content: a.string(),
+      restaurant: a.string(),
+      visited: a.boolean(),
+      rating: a.enum(['no visit','bad', 'medium', 'good'])
     })
-    .authorization([a.allow.owner(), a.allow.public().to(['read'])]),
+    .authorization([a.allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -20,7 +22,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'apiKey',
+    defaultAuthorizationMode: 'userPool',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
